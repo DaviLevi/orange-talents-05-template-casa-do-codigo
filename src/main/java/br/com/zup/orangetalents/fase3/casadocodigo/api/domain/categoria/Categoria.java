@@ -24,6 +24,11 @@ public class Categoria {
 	@Deprecated
 	public Categoria() {}
 
+	
+	public Categoria(Long id) {
+		this.id = id;
+	}
+	
 	public Categoria(String nome) {
 		this.nome = nome;
 	}
@@ -32,5 +37,8 @@ public class Categoria {
 		return new CategoriaModel(nome);
 	}
 
+	public Long getId() {
+		return this.id;
+	}
 	
 }
