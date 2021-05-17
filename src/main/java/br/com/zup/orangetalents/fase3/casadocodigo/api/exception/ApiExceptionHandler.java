@@ -11,12 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.error.Erro;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.error.Erro.PropriedadeInvalida;
+import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.autor.EmailEmUsoException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
@@ -42,6 +44,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 				propriedadesInvalidas);
 		
 		return handleExceptionInternal(ex, erro, headers, status, request);
+	}
+	
+	@ExceptionHandler(EmailEmUsoException.class)
+	protected ResponseEntity<Object> handleEmailEmUso(EmailEmUsoException ex, WebRequest request) {
+			
+		HttpStatus status = HttpStatus.CONFLICT;
+		
+		Erro erro = new Erro(status.value(), "Conflito email", 
+				ex.getMessage());
+		
+		return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);
 	}
 	
 }
