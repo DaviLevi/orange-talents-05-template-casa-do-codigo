@@ -40,6 +40,9 @@ public class Autor {
 	@Column(name = "DataCadastro")
 	private LocalDateTime dataCadastro;
 	
+	@Deprecated
+	public Autor() {}
+	
 	public Autor(@NotBlank String nome, @Email @NotBlank String email, @NotBlank @Size(max = 400) String descricao) {
 		this.nome = nome;
 		this.email = email;

@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.autor.Autor;
+import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.validator.Unico;
 
 public class CadastroAutorRequest {
 
@@ -13,6 +14,7 @@ public class CadastroAutorRequest {
 	
 	@NotBlank
 	@Email
+	@Unico(nomeCampo = "email", classeDominio = Autor.class)
 	private String email;
 	
 	@NotBlank
