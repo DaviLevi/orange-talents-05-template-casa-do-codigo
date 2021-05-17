@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,19 +24,23 @@ public class Autor {
 	private Long id;
 	
 	@Column(name = "Nome")
+	@NotBlank
 	private String nome;
 	
 	@Column(name = "Email")
+	@Email
+	@NotBlank
 	private String email;
 	
 	@Column(name = "Descricao", length = 400)
+	@NotBlank @Size(max = 400)
 	private String descricao;
 	
 	@CreationTimestamp
 	@Column(name = "DataCadastro")
 	private LocalDateTime dataCadastro;
 	
-	public Autor(String nome, String email, String descricao) {
+	public Autor(@NotBlank String nome, @Email @NotBlank String email, @NotBlank @Size(max = 400) String descricao) {
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
