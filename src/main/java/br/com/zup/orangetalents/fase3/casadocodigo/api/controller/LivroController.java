@@ -8,15 +8,18 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroDetalheModel;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroModel;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroResumoModel;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.request.CadastroLivroRequest;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.livro.Livro;
+import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.livro.LivroNaoEncontradoException;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.livro.LivroRepository;
 
 @RestController
@@ -38,8 +41,13 @@ public class LivroController {
 		return ResponseEntity.ok(livroCadastrado.paraModelo());
 	}
 	
+	@GetMapping("/{id}")
+	public LivroDetalheModel detalhar(@PathVariable Long id){
+		Livro detalheLivro = livroRepository.buscaDetalheLivroPeloId(id).orElseThrow(() -> new LivroNaoEncontradoException(id));
+		return detalheLivro.paraDetalheModelo();
+	}
+	
 	@GetMapping
-	@Transactional
 	public List<LivroResumoModel> listar(){
 		return livroRepository.findAll().stream().map(l -> l.paraResumoModelo()).collect(Collectors.toList());
 	}

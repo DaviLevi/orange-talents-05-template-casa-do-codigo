@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.error.Erro;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.error.Erro.PropriedadeInvalida;
-import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.autor.EmailEmUsoException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
@@ -46,15 +45,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		return handleExceptionInternal(ex, erro, headers, status, request);
 	}
 	
-	@ExceptionHandler(EmailEmUsoException.class)
-	protected ResponseEntity<Object> handleEmailEmUso(EmailEmUsoException ex, WebRequest request) {
+	@ExceptionHandler(RecursoNaoEncontradoException.class)
+	protected ResponseEntity<Object> handleEmailEmUso(RecursoNaoEncontradoException ex, WebRequest request) {
 			
-		HttpStatus status = HttpStatus.CONFLICT;
+		HttpStatus status = HttpStatus.NOT_FOUND;
 		
-		Erro erro = new Erro(status.value(), "Conflito email", 
+		Erro erro = new Erro(status.value(), "Recurso nao encontrado", 
 				ex.getMessage());
 		
 		return handleExceptionInternal(ex, erro, new HttpHeaders(), status, request);
 	}
-	
 }
