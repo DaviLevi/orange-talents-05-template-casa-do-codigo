@@ -46,7 +46,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	}
 	
 	@ExceptionHandler(RecursoNaoEncontradoException.class)
-	protected ResponseEntity<Object> handleEmailEmUso(RecursoNaoEncontradoException ex, WebRequest request) {
+	protected ResponseEntity<Object> handleRecursoNaoEncontrado(RecursoNaoEncontradoException ex, WebRequest request) {
 			
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		
