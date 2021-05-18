@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroModel;
+import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroResumoModel;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.autor.Autor;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.categoria.Categoria;
 
@@ -84,5 +85,9 @@ public class Livro {
 	
 	public LivroModel paraModelo() {
 		return new LivroModel(titulo, resumo, sumario, preco, paginas, isbn, dataPublicacao, autor.getId(), categoria.getId());
+	}
+	
+	public LivroResumoModel paraResumoModelo() {
+		return new LivroResumoModel(id, titulo);
 	}
 }

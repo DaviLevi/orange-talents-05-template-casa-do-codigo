@@ -1,15 +1,20 @@
 package br.com.zup.orangetalents.fase3.casadocodigo.api.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroModel;
+import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroResumoModel;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.request.CadastroLivroRequest;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.livro.Livro;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.livro.LivroRepository;
@@ -31,6 +36,12 @@ public class LivroController {
 		Livro livroCadastrado = livroRepository.save(requisicao.getDominio());
 		
 		return ResponseEntity.ok(livroCadastrado.paraModelo());
+	}
+	
+	@GetMapping
+	@Transactional
+	public List<LivroResumoModel> listar(){
+		return livroRepository.findAll().stream().map(l -> l.paraResumoModelo()).collect(Collectors.toList());
 	}
 	
 	
