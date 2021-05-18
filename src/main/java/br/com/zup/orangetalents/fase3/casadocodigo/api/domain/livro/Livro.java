@@ -18,10 +18,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.AutorModel;
-import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroDetalheModel;
-import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroModel;
-import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.LivroResumoModel;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.autor.Autor;
 import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.categoria.Categoria;
 
@@ -85,15 +81,45 @@ public class Livro {
 		this.categoria = categoria;
 	}
 	
-	public LivroModel paraModelo() {
-		return new LivroModel(titulo, resumo, sumario, preco, paginas, isbn, dataPublicacao, autor.getId(), categoria.getId());
+	public Long getId() {
+		return id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public String getResumo() {
+		return resumo;
+	}
+
+	public String getSumario() {
+		return sumario;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public Integer getPaginas() {
+		return paginas;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
 	}
 	
-	public LivroResumoModel paraResumoModelo() {
-		return new LivroResumoModel(id, titulo);
-	}
 	
-	public LivroDetalheModel paraDetalheModelo() {
-		return new LivroDetalheModel(titulo, resumo, sumario, preco, paginas, isbn, dataPublicacao, new AutorModel(autor));
-	}
 }

@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
-import br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model.CategoriaModel;
-
 @Entity
 public class Categoria {
 
@@ -24,7 +22,6 @@ public class Categoria {
 	@Deprecated
 	public Categoria() {}
 
-	
 	public Categoria(Long id) {
 		this.id = id;
 	}
@@ -33,12 +30,12 @@ public class Categoria {
 		this.nome = nome;
 	}
 	
-	public CategoriaModel paraModel() {
-		return new CategoriaModel(nome);
-	}
-
 	public Long getId() {
 		return this.id;
+	}
+
+	public String getNome() {
+		return nome;
 	}
 	
 }

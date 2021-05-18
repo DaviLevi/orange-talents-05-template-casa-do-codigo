@@ -38,18 +38,18 @@ public class LivroController {
 		
 		Livro livroCadastrado = livroRepository.save(requisicao.getDominio());
 		
-		return ResponseEntity.ok(livroCadastrado.paraModelo());
+		return ResponseEntity.ok(new LivroModel(livroCadastrado));
 	}
 	
 	@GetMapping("/{id}")
 	public LivroDetalheModel detalhar(@PathVariable Long id){
 		Livro detalheLivro = livroRepository.buscaDetalheLivroPeloId(id).orElseThrow(() -> new LivroNaoEncontradoException(id));
-		return detalheLivro.paraDetalheModelo();
+		return new LivroDetalheModel(detalheLivro);
 	}
 	
 	@GetMapping
 	public List<LivroResumoModel> listar(){
-		return livroRepository.findAll().stream().map(l -> l.paraResumoModelo()).collect(Collectors.toList());
+		return livroRepository.findAll().stream().map(LivroResumoModel::new).collect(Collectors.toList());
 	}
 	
 	

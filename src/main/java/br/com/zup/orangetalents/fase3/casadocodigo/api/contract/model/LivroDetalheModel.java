@@ -3,6 +3,8 @@ package br.com.zup.orangetalents.fase3.casadocodigo.api.contract.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import br.com.zup.orangetalents.fase3.casadocodigo.api.domain.livro.Livro;
+
 public class LivroDetalheModel {
 	
 	private String titulo;
@@ -21,17 +23,16 @@ public class LivroDetalheModel {
 	
 	private AutorModel autor;
 
-	public LivroDetalheModel(String titulo, String resumo, String sumario, BigDecimal preco, Integer paginas,
-			String isbn, LocalDate dataPublicacao, AutorModel autor) {
+	public LivroDetalheModel(Livro livro) {
 		super();
-		this.titulo = titulo;
-		this.resumo = resumo;
-		this.sumario = sumario;
-		this.preco = preco;
-		this.paginas = paginas;
-		this.isbn = isbn;
-		this.dataPublicacao = dataPublicacao;
-		this.autor = autor;
+		this.titulo = livro.getTitulo();
+		this.resumo = livro.getResumo();
+		this.sumario = livro.getSumario();
+		this.preco = livro.getPreco();
+		this.paginas = livro.getPaginas();
+		this.isbn = livro.getIsbn();
+		this.dataPublicacao = livro.getDataPublicacao();
+		this.autor = new AutorModel(livro.getAutor());
 	}
 
 	public String getTitulo() {

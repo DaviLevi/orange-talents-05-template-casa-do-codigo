@@ -30,7 +30,7 @@ public class CategoriaController {
 		
 		Categoria categoriaCadastrada = repositorio.save(requisicao.getDominio());
 		
-		return categoriaCadastrada.paraModel();
+		return new CategoriaModel(categoriaCadastrada);
 		
 	}
 	
